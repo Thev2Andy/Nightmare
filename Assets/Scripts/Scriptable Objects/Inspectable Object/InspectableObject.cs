@@ -9,5 +9,5 @@ public class InspectableObject : ScriptableObject {
 	public string ItemType;
 	public string ItemDescription;
 	public Sprite ItemImage;
-	public KeyCode InspectKey = KeyCode.Y;
+	// public bool Pickupable; // Some items might be used to unlock triggers. Unused for now.
 }
