@@ -10,9 +10,4 @@ public class InspectableObject : MonoBehaviour {
 	{
 		InspectUI.Instance.Inspect(ObjectData, this.gameObject);
 	}
-
-	// void Update()
-	// {
-	// 	if(Input.GetKeyDown(KeyCode.Y)) Inspect();
-	// }
 }

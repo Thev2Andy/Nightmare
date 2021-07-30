@@ -42,8 +42,7 @@ public class InspectUI : MonoBehaviour {
 		InspectedObject = InspectableObjectDataHolder;
 		if (InspectedObject != null)
 		{
-			if (InspectedObject.GetComponent<Renderer>() != null) InspectedObject.GetComponent<Renderer>().enabled = false;
-			if (InspectedObject.GetComponent<Rigidbody>() != null) InspectedObject.GetComponent<Rigidbody>().isKinematic = true;
+			InspectedObject.SetActive(false);
 		}
 
 		InspectUIObject.SetActive(true);
@@ -65,11 +64,19 @@ public class InspectUI : MonoBehaviour {
 			InspectUIObject.SetActive(false);
 			if (InspectedObject != null)
 			{
-				if (InspectedObject.GetComponent<Renderer>() != null) InspectedObject.GetComponent<Renderer>().enabled = true;
-				if (InspectedObject.GetComponent<Rigidbody>() != null) InspectedObject.GetComponent<Rigidbody>().isKinematic = false;
+				InspectedObject.SetActive(true);
+
+				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
 			}
 			InspectedObject = null;
 			CurrentlyInspecting = false;
+		}
+
+		if (CurrentlyInspecting)
+		{
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 		}
 	}
 }

@@ -16,8 +16,8 @@ public class ObjectInteractor : MonoBehaviour {
 			if (hit.collider.gameObject.GetComponent<InspectableObject>() && !InspectUI.Instance.CurrentlyInspecting)
 			{
 				TooltipText.gameObject.SetActive(true);
-				TooltipText.text = "Press [Y] to inspect.";
-				if (Input.GetKeyDown(KeyCode.Y))
+				TooltipText.text = "Press [E] to inspect.";
+				if (Input.GetKeyDown(KeyCode.E))
 				{
 					hit.collider.gameObject.GetComponent<InspectableObject>().Inspect();
 				}
