@@ -15,24 +15,31 @@ public class WeaponScript : MonoBehaviour {
 
 	// Private variables.
 	private ParticleSystem[] ps;
-	bool aiming;
-	bool jumping;
-	bool reloading;
-	float curSpeed;
-	Animator a;
-	MovementSystem ms;
-	AudioSource au;
-	float shotTimer;
+	private bool aiming;
+	private bool jumping;
+	private bool reloading;
+	private float curSpeed;
+	private Animator a;
+	private MovementSystem ms;
+	private AudioSource au;
+	private float shotTimer;
 
-	void Start()
+	private void Start()
 	{
 		a = gameObject.GetComponentInChildren<Animator>();
 		au = gameObject.GetComponent<AudioSource>();
 
 		ps = gameObject.GetComponentsInChildren<ParticleSystem>();
+
+		NoAmmo(Mag <= 0);
+	}
+
+	private void OnEnable()
+	{
+	    if(a != null) NoAmmo(Mag <= 0);
 	}
 	
-	void Update()
+	private void Update()
 	{
 		if (shotTimer > 0)
 			shotTimer -= Time.deltaTime;
@@ -48,7 +55,7 @@ public class WeaponScript : MonoBehaviour {
 		{
 			targetSpeed = 1;
 
-			if (Input.GetKey(KeyCode.LeftShift))
+			if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") != 0))
 			{
 				targetSpeed = 2;
 			}
@@ -56,13 +63,13 @@ public class WeaponScript : MonoBehaviour {
 
 		if (targetSpeed != 2)
 		{
-			aiming = Input.GetKey (KeyCode.Mouse1);
+			aiming = Input.GetKey(KeyCode.Mouse1);
 
 			if (Mag > 0)
 			{
 				if (Automatic)
 				{
-					//If the trigger is held and we can shoot
+					// If the trigger is held and we can shoot.
 					if (Input.GetKey(KeyCode.Mouse0) && shotTimer <= 0)
 					{
 						Shoot();
@@ -84,7 +91,7 @@ public class WeaponScript : MonoBehaviour {
 
 		jumping = Input.GetKey(KeyCode.Space);
 
-		reloading = Input.GetKey(KeyCode.R);
+		reloading = Input.GetKeyDown(KeyCode.Mouse0) && Mag <= 0 || Input.GetKey(KeyCode.R);
 
 		curSpeed = Mathf.Lerp(curSpeed, targetSpeed, Time.deltaTime * AnimationAcceleration);
 
@@ -99,7 +106,7 @@ public class WeaponScript : MonoBehaviour {
 			a.SetBool("grounded", true);
 	}
 
-	void Shoot()
+	private void Shoot()
 	{
 		if (aiming)
 			a.CrossFade("AimShoot", 0.02f, 0, 0);
@@ -121,7 +128,7 @@ public class WeaponScript : MonoBehaviour {
 	public void LoadMag()
 	{
 		Mag = MagSize;
-		NoAmmo (false);
+		NoAmmo(false);
 	}
 
 	public void Eject()
@@ -142,9 +149,9 @@ public class WeaponScript : MonoBehaviour {
 
 	public void NoAmmo(bool s)
 	{
-		//In some weapons, there is an animation to show that the Magazine is empty.
-		//This animation is being played constantly on the second layer of the animation controller.
-		//This layer will override the base layer
+		// In some weapons, there is an animation to show that the Magazine is empty.
+		// This animation is being played constantly on the second layer of the animation controller.
+		// This layer will override the base layer.
 		if (s)
 		{
 			a.SetLayerWeight(1, 1);
