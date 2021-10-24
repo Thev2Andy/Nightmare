@@ -42,7 +42,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0f7c6706f99f918428021aa6b87b483c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11714,6 +11714,7 @@ MonoBehaviour:
   LightObject: {fileID: 108074915613014464}
   IsOn: 1
   EnergyLevel: 100
+  EquipSoundSource: {fileID: 751505595}
   AttackOrigin: {fileID: 4309885994307372}
   AttackPushForce: 125
   AttackRange: 3.75

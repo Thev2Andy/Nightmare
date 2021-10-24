@@ -7,6 +7,7 @@ public class FlashlightSystem : MonoBehaviour {
 	public Light LightObject;
 	public bool IsOn;
 	[Range(0, 100)] public float EnergyLevel;
+	public AudioSource EquipSoundSource;
 	public Transform AttackOrigin;
 	public float AttackPushForce;
 	public float AttackRange;
@@ -18,13 +19,16 @@ public class FlashlightSystem : MonoBehaviour {
 	[HideInInspector] public bool IsAttacking;
 
 	// Use this for initialization
-	private void Start ()
-	{
+	private void Start() {
 		SetFlashlight(IsOn, false);
+	}
+
+	private void OnEnable() {
+	   if(IsOn) EquipSoundSource.Play();
 	}
 	
 	// Update is called once per frame
-	private void Update ()
+	private void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.F)) SetFlashlight(!IsOn, true);
 		if(IsOn) EnergyLevel -= (Time.deltaTime / 7.5f);
