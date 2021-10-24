@@ -12,6 +12,7 @@ public class FlashlightSystem : MonoBehaviour {
 	public float AttackRange;
 	public Animator FlashlightAnimator;
 	public AudioClip SwitchSound;
+	public AudioClip SwingSound;
 
 	// Private variables.
 	[HideInInspector] public bool IsAttacking;
@@ -32,13 +33,19 @@ public class FlashlightSystem : MonoBehaviour {
 		if(EnergyLevel <= 0) SetFlashlight(false, false);
 
 		if(Input.GetKeyDown(KeyCode.Mouse0) && !IsAttacking && Time.timeScale > 0) {
-			FlashlightAnimator.SetTrigger("Attack");
-			IsAttacking = true;
+			BeginAttack();
 		}
+	}
+
+	public void BeginAttack()
+	{
+		FlashlightAnimator.SetTrigger("Attack");
+		IsAttacking = true;
 	}
 
 	public void Attack()
 	{
+		FlashlightAnimator.ResetTrigger("Attack");
 		RaycastHit Hit;
 		if (Physics.Raycast(AttackOrigin.position, AttackOrigin.forward, out Hit, AttackRange))
 		{
@@ -47,6 +54,8 @@ public class FlashlightSystem : MonoBehaviour {
 				Hit.rigidbody.AddForceAtPosition((-Hit.normal * AttackPushForce), Hit.point);
 			}
 		}
+
+		Camera.main.GetComponent<AudioSource>()?.PlayOneShot(SwingSound);
 
 		IsAttacking = false;
 	}
