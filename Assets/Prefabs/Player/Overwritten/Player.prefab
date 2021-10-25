@@ -242,9 +242,19 @@ MonoBehaviour:
   Mag: 3
   ReserveAmmo: 12
   RateOfFire: 0.15
+  HitMask:
+    serializedVersion: 2
+    m_Bits: 823
+  PushScale: 875
+  MaxMassIndependentForce: 100
+  BulletImpact: {fileID: 9116128483503904312, guid: e9f7076902a607e41bc5ef90e86b460b,
+    type: 3}
   Automatic: 0
+  Range: 350
   AnimationAcceleration: 4
   AllowADS: 1
+  BulletOrigin: {fileID: 4309885994307372}
+  MuzzleFlashLight: {fileID: 3629294603788043868}
   Casing: {fileID: 1000013106887604, guid: c31ddd8288132ec4a9e174ccc4aecf75, type: 3}
   CasingSpawn: {fileID: 4587835305395736}
   CasingForce: {x: 10, y: 5, z: 0}
@@ -1265,7 +1275,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -1318,7 +1328,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -5573,7 +5583,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a2e3bcde53594984ca1a95df3a13dc0b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5854,6 +5863,7 @@ Transform:
   - {fileID: 4020551421398684}
   - {fileID: 4587835305395736}
   - {fileID: 4631278639458048}
+  - {fileID: 8005234415599932130}
   m_Father: {fileID: 4515896390594258}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -7.2843823, y: 24.922565, z: 177.73186}
@@ -11461,7 +11471,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f24d0bce54e04754fb5e20663f5b817b, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11969,7 +11978,7 @@ MonoBehaviour:
   EnergyLevel: 77.35
   EquipSoundSource: {fileID: 751505595}
   AttackOrigin: {fileID: 4309885994307372}
-  AttackPushForce: 125
+  AttackPushForce: 247.5
   AttackRange: 3.75
   FlashlightAnimator: {fileID: 95281963077576472}
   SwitchSound: {fileID: 8300000, guid: 0f7c6706f99f918428021aa6b87b483c, type: 3}
@@ -12962,7 +12971,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4280709681335994}
   - component: {fileID: 20483193637918002}
-  - component: {fileID: 114642176828292990}
   - component: {fileID: 468428548}
   m_Layer: 8
   m_Name: Weapon Camera
@@ -13029,19 +13037,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &114642176828292990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649691369044424}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 980bb36403a0c9f4599ad766b00c2fbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponCamera: {fileID: 20483193637918002}
 --- !u!114 &468428548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23894,7 +23889,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1e6772cfcd9875f4e8ad0ee8b6333dd2, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24262,6 +24256,112 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!1 &1812747646950954068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1149598608101075690}
+  - component: {fileID: 483748192722003869}
+  - component: {fileID: 4411934160293824841}
+  m_Layer: 8
+  m_Name: SMG MuzzleFlash Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1149598608101075690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812747646950954068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1335, y: -0.545, z: 0.2215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9069056239099482221}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &483748192722003869
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812747646950954068}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Intensity: 0.7735
+  m_Range: 25
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &4411934160293824841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812747646950954068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809a779253ecc6740a4f8eb569126987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisableDelay: 0.065
 --- !u!1 &2543464299792979482
 GameObject:
   m_ObjectHideFlags: 0
@@ -24301,6 +24401,112 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3629294603788043868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8005234415599932130}
+  - component: {fileID: 5318808398672932558}
+  - component: {fileID: 4793201546862006809}
+  m_Layer: 8
+  m_Name: Pistol MuzzleFlash Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8005234415599932130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629294603788043868}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.213, z: 0.015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4877708260376868}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &5318808398672932558
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629294603788043868}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.6862745, b: 0, a: 1}
+  m_Intensity: 0.7735
+  m_Range: 25
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 0
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &4793201546862006809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629294603788043868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809a779253ecc6740a4f8eb569126987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DisableDelay: 0.065
 --- !u!1 &3665479603960477563
 GameObject:
   m_ObjectHideFlags: 0
@@ -29646,9 +29852,19 @@ MonoBehaviour:
   Mag: 7
   ReserveAmmo: 22
   RateOfFire: 0.1
+  HitMask:
+    serializedVersion: 2
+    m_Bits: 823
+  PushScale: 750
+  MaxMassIndependentForce: 100
+  BulletImpact: {fileID: 9116128483503904312, guid: e9f7076902a607e41bc5ef90e86b460b,
+    type: 3}
   Automatic: 1
+  Range: 175
   AnimationAcceleration: 4
   AllowADS: 0
+  BulletOrigin: {fileID: 9069056238049576337}
+  MuzzleFlashLight: {fileID: 1812747646950954068}
   Casing: {fileID: 1000010251007650, guid: 65815309d475ec8408744d614c4bc82b, type: 3}
   CasingSpawn: {fileID: 9069056241096081007}
   CasingForce: {x: 10, y: 5, z: 0}
@@ -29959,6 +30175,7 @@ Transform:
   - {fileID: 9069056239702252411}
   - {fileID: 9069056239147422633}
   - {fileID: 9069056238530818769}
+  - {fileID: 1149598608101075690}
   m_Father: {fileID: 9069056238049576337}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}

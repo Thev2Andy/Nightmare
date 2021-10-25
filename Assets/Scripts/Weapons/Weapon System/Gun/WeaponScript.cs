@@ -8,9 +8,16 @@ public class WeaponScript : MonoBehaviour {
 	public int Mag;
 	public int ReserveAmmo;
 	public float RateOfFire;
+	public LayerMask HitMask;
+	public float PushScale;
+	public float MaxMassIndependentForce;
+	public GameObject BulletImpact;
 	public bool Automatic;
+	public float Range;
 	public float AnimationAcceleration;
 	public bool AllowADS;
+	public Transform BulletOrigin;
+	public GameObject MuzzleFlashLight;
 	public GameObject Casing;
 	public Transform CasingSpawn;
 	public Vector3 CasingForce;
@@ -125,8 +132,30 @@ public class WeaponScript : MonoBehaviour {
 		if (Mag > 0)
 			Mag--;
 
+		if (Physics.Raycast(BulletOrigin.position, BulletOrigin.transform.TransformDirection(Vector3.forward), out RaycastHit Hit, Range, HitMask))
+		{
+			if(BulletImpact != null)
+			{
+				GameObject ImpactFX = Instantiate(BulletImpact, Hit.point, Quaternion.LookRotation(Hit.normal));
+				Destroy(ImpactFX, 0.05f);
+			}
+
+
+			// if (Hit.collider.gameObject.TryGetComponent<EnemyHitbox>(out EnemyHitbox enemyHitbox))
+			// {
+			// 	enemyHitbox.InflictDamage();
+			// }
+
+			if (Hit.collider.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+			{
+				rb.AddForceAtPosition((-Hit.normal * PushScale * Mathf.Abs(Mathf.Clamp((rb.mass * 0.75f), -MaxMassIndependentForce, MaxMassIndependentForce))), Hit.point);
+			}
+		}
+
 		if (ShootSound != null && au != null)
 			au.PlayOneShot(ShootSound);
+
+		MuzzleFlashLight.SetActive(true);
 
 		for (int i = 0;i < ps.Length;i++)
 		{
