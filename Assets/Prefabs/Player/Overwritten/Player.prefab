@@ -6743,7 +6743,7 @@ MonoBehaviour:
   GameUIObject: {fileID: 1683595504805388}
   ItemNameText: {fileID: 114507251049228840}
   ItemTypeText: {fileID: 114131609732494724}
-  ItemImage: {fileID: 114482261396915218}
+  ItemImageUI: {fileID: 114482261396915218}
   ItemDescriptionText: {fileID: 114862406454309370}
   PickupPrompt: {fileID: 114777111883080724}
   CurrentlyInspecting: 0

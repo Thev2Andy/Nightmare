@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class InspectableObject : MonoBehaviour {
 
-	public InspectableObjectData ObjectData;
+	public string ItemName;
+	public string ItemType;
+	public string ItemDescription;
+	public Sprite ItemImage;
+	public AudioClip ItemInspectSound;
+	public bool Pickupable;
 
 	public void Inspect()
 	{
-		InspectUI.Instance.Inspect(ObjectData, this.gameObject);
+		InspectUI.Instance.Inspect(ItemName, ItemType, ItemDescription, ItemImage, ItemInspectSound, Pickupable, this.gameObject);
 	}
 }

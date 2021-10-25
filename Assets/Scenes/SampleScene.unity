@@ -292,7 +292,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5105548711f311d499650e76b1346ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectData: {fileID: 11400000, guid: 162edbbec21e15e438018bfb0558c4ad, type: 2}
+  ItemName: Test Cube
+  ItemType: Misc
+  ItemDescription: A cube used for testing the Inspect system. Cool.
+  ItemImage: {fileID: 21300000, guid: 1b38dd6a113a05542bf44d8384f45cf9, type: 3}
+  ItemInspectSound: {fileID: 0}
+  Pickupable: 0
 --- !u!1 &1335785875
 GameObject:
   m_ObjectHideFlags: 0
