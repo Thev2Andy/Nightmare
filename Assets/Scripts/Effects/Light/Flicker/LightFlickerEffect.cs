@@ -36,7 +36,7 @@ public class LightFlickerEffect : MonoBehaviour
 
     private void Update()
     {
-        if (LightToFlicker == null)
+        if (LightToFlicker == null || Time.timeScale <= 0)
             return;
 
         // Pop off an item if too big.

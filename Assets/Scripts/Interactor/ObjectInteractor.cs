@@ -5,32 +5,30 @@ using UnityEngine.UI;
 
 public class ObjectInteractor : MonoBehaviour {
 
+	public LayerMask ObjectMask;
 	public float Range;
-	public Text TooltipText;
 	
 	private void Update ()
 	{
-		RaycastHit hit;
-		if (Physics.Raycast(this.transform.position, transform.forward, out hit, Range))
+		RaycastHit Hit;
+		if (Physics.Raycast(this.transform.position, transform.forward, out Hit, Range, ObjectMask))
 		{
-			if (hit.collider.gameObject.GetComponent<InspectableObject>() && !InspectUI.Instance.CurrentlyInspecting)
+			if (Hit.collider.gameObject.GetComponent<InspectableObject>() && !InspectUI.Instance.CurrentlyInspecting)
 			{
-				TooltipText.gameObject.SetActive(true);
-				TooltipText.text = "Press [E] to inspect.";
+				MessageUIController.Instance.ShowPrompt("Press <color=lightBlue>E</color> to inspect.", 3f);
 				if (Input.GetKeyDown(KeyCode.E))
 				{
-					hit.collider.gameObject.GetComponent<InspectableObject>().Inspect();
+					Hit.collider.gameObject.GetComponent<InspectableObject>()?.Inspect();
 				}
 			}else
 			{
-				TooltipText.gameObject.SetActive(false);
+				MessageUIController.Instance.ShowPrompt("", 0f);
 			}
 		}else
 		{
-			TooltipText.gameObject.SetActive(false);
+			MessageUIController.Instance.ShowPrompt("", 0f);
 		}
 
 		// TODO: Add support for all interabtable objects. (weapon pickups, ammo pickups, etc) For now we only have the inspectable objects.
-		// TODO: Use layer masks to not include the player. For now, the player is on the ignore raycast layer, which limits the possible enemy attacks.
 	}
 }

@@ -17,18 +17,17 @@ public class WeaponInventory : MonoBehaviour
     public bool HasFlashlight;
 
     [HideInInspector] public int CurrentSelection {get; private set;}
+    [HideInInspector] public int LastFrameSelection {get; private set;}
 
     private void Awake()
     {
-        HasPistol = true;
+        CurrentSelection = 2;
         ChangeWeapon();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        int LastFrameSelection = CurrentSelection;
-
         if(Input.mouseScrollDelta.y > 0)
         {
             CurrentSelection++;
@@ -72,6 +71,8 @@ public class WeaponInventory : MonoBehaviour
         }
 
         if(Input.mouseScrollDelta.y != 0) ChangeWeapon();
+
+        LastFrameSelection = CurrentSelection;
     }
 
     public void ChangeWeapon()
@@ -84,6 +85,9 @@ public class WeaponInventory : MonoBehaviour
                     PistolObject.SetActive(true);
                     SMGObject.SetActive(false);
                     FlashlightObject.SetActive(false);
+                }else {
+                    CurrentSelection++;
+                    ChangeWeapon();
                 }
                 break;
             
@@ -93,6 +97,9 @@ public class WeaponInventory : MonoBehaviour
                     SMGObject.SetActive(true);
                     PistolObject.SetActive(false);
                     FlashlightObject.SetActive(false);
+                }else {
+                    CurrentSelection++;
+                    ChangeWeapon();
                 }
                 break;
             
@@ -102,6 +109,9 @@ public class WeaponInventory : MonoBehaviour
                     FlashlightObject.SetActive(true);
                     PistolObject.SetActive(false);
                     SMGObject.SetActive(false);
+                }else {
+                    CurrentSelection = -1;
+                    ChangeWeapon();
                 }
                 break;
 

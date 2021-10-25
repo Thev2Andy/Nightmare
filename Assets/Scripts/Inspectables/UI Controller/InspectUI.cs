@@ -7,6 +7,7 @@ public class InspectUI : MonoBehaviour {
 
 	[Header("Item Display.")]
 	public GameObject InspectUIObject;
+	public GameObject GameUIObject;
 	public Text ItemNameText;
 	public Text ItemTypeText;
 	public Image ItemImage;
@@ -14,9 +15,6 @@ public class InspectUI : MonoBehaviour {
 
 	[Header("Prompts.")]
 	public Text PickupPrompt;
-
-	[Header("Audio.")]
-	public AudioSource CameraAudio;
 
 	// Private & hidden variables:
 	private GameObject InspectedObject;
@@ -53,7 +51,7 @@ public class InspectUI : MonoBehaviour {
 
 		PickupPrompt.gameObject.SetActive((ObjectToInspect.Pickupable ? true : false));
 
-		if (ObjectToInspect.ItemInspectSound != null && CameraAudio != null) CameraAudio.PlayOneShot(ObjectToInspect.ItemInspectSound);
+		if (ObjectToInspect.ItemInspectSound != null) Camera.main.GetComponent<AudioSource>()?.PlayOneShot(ObjectToInspect.ItemInspectSound);
 	}
 
 	void Update()
@@ -78,5 +76,7 @@ public class InspectUI : MonoBehaviour {
 			Cursor.lockState = CursorLockMode.None;
 			Cursor.visible = true;
 		}
+
+		GameUIObject.SetActive(!InspectUIObject.activeInHierarchy);
 	}
 }
